@@ -35,7 +35,7 @@ function leerJSON(json) {
     document.getElementById("ventas").innerHTML = out;
 
 }
-function calcularTotalVentas(json) {
+function mostrar(){
 
     var out = "-----------Total En Ventas-----------<br>";
     var totalVentas = 0.0;
@@ -48,12 +48,16 @@ function calcularTotalVentas(json) {
     document.getElementById("totalVentas").innerHTML = "El total de venta es de : " + totalVentas;
 
 }
-function mostrarVentas() {
+function r_estudiante() {
     leerJSON(ventas);
 }
-
-
-function mostrarTotalVentas() {
+function m_promedio() {
+    leerJSON(ventas);
+}
+function m_mayor() {
+    calcularTotalVentas(ventas);
+}5
+function m_menor() {
     calcularTotalVentas(ventas);
 }
 
