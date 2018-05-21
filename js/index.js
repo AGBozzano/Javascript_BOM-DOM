@@ -1,30 +1,32 @@
 var Registro = [
     {
-        "codigo": "001",
-        "nombre": "Alejandro",
-        "nota": 4
+        codigo: "001",
+        nombre: "Alejandro",
+        nota: 4
     }, {
-        "codigo": "002",
-        "nombre": "Andres",
-        "nota": 3
+        codigo: "002",
+        nombre: "Andres",
+        nota: 3
     }, {
-        "codigo": "003",
-        "nombre": "Federico",
-        "nota": 5
+        codigo: "003",
+        nombre: "Federico",
+        nota: 5
     }, {
-        "codigo": "004",
-        "nombre": "Gonzalo",
-        "nota": 8
+        codigo: "004",
+        nombre: "Gonzalo",
+        nota: 8
     }, {
-        "codigo": "005",
-        "nombre": "Matias",
-        "nota": 3
+        codigo: "005",
+        nombre: "Matias",
+        nota: 3
     }, {
-        "codigo": "006",
-        "nombre": "Cristian",
-        "nota": 8
+        codigo: "006",
+        nombre: "Cristian",
+        nota: 8
     }
 ];
+
+
 function leerJSON(json) {
     var out = "-----------Ventas-----------<br>";
     var i;
@@ -37,22 +39,27 @@ function leerJSON(json) {
 }
 function mostrar(){
 
-    var out = "-----------Total En Ventas-----------<br>";
-    var totalVentas = 0.0;
-    for (i = 0; i < json.length; i++) {
-        totalVentas += json[i].valor;
+    var tbody = document.getElementById("contenido-tabla");
+    var tablaLlena = "";
+    
+    for(var i=0;i<Registro.length;i++){
+        tablaLlena += "<tr><td>"+Registro[i].codigo+"</td><td>"+Registro[i].nombre+"</td><td>"+Registro[i].nota+"</td></tr>";
     }
-
- 
-
-    document.getElementById("totalVentas").innerHTML = "El total de venta es de : " + totalVentas;
-
+    tbody.innerHTML = tablaLlena;
 }
 function r_estudiante() {
-    leerJSON(ventas);
+    event.preventDefault();
+
+    var u_cod = document.getElementById("codigo").value;
+    var u_nom = document.getElementById("nombre").value;
+    var u_not = document.getElementById("nota").value;
+
+    var nuevoRegistro = { codigo: u_cod, nombre:u_nom, nota:u_not};
+
+    Registro.push(nuevoRegistro);
 }
 function m_promedio() {
-    leerJSON(ventas);
+    mostrar();
 }
 function m_mayor() {
     calcularTotalVentas(ventas);
