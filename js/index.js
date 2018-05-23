@@ -1,4 +1,4 @@
-var Registro = [
+var Estudiante = [
     {
         codigo: "001",
         nombre: "Alejandro",
@@ -26,7 +26,28 @@ var Registro = [
     }
 ];
 
+window.onload = function(){
+    mostrar();
+    actualizar_cod();
 
+    document.getElementById("b_registrar").addEventListener("click", r_estudiante);
+    document.getElementById("b_promedio").addEventListener("click", m_promedio);
+    document.getElementById("b_mayor").addEventListener("click", m_mayor);
+    document.getElementById("b_menor").addEventListener("click", m_menor);
+
+
+};
+
+function actualizar_cod(){
+
+    var codigo = document.getElementById("codigo");
+    codigo.value = "";
+    codigo.value ="00" +( Math.trunc(Estudiante[Estudiante.length-1].codigo) + 1);
+
+    if(Math.trunc(Estudiante[Estudiante.length-1].codigo)+1 > 9){
+        codigo.value ="0" +( Math.trunc(Estudiante[Estudiante.length-1].codigo) + 1);
+    }
+}
 function leerJSON(json) {
     var out = "-----------Ventas-----------<br>";
     var i;
@@ -39,32 +60,49 @@ function leerJSON(json) {
 }
 function mostrar(){
 
+
     var tbody = document.getElementById("contenido-tabla");
+    tbody.innerHTML = "";
     var tablaLlena = "";
     
-    for(var i=0;i<Registro.length;i++){
-        tablaLlena += "<tr><td>"+Registro[i].codigo+"</td><td>"+Registro[i].nombre+"</td><td>"+Registro[i].nota+"</td></tr>";
+    for(var i=0;i<Estudiante.length;i++){
+        tablaLlena += "<tr><td>"+Estudiante[i].codigo+"</td><td>"+Estudiante[i].nombre+"</td><td>"+Estudiante[i].nota+"</td></tr>";
     }
     tbody.innerHTML = tablaLlena;
 }
 function r_estudiante() {
     event.preventDefault();
 
-    var u_cod = document.getElementById("codigo").value;
-    var u_nom = document.getElementById("nombre").value;
-    var u_not = document.getElementById("nota").value;
+    var e_cod = document.getElementById("codigo").value;
+    var e_nom = document.getElementById("nombre").value;
+    var e_not = parseInt(document.getElementById("nota").value);
 
-    var nuevoRegistro = { codigo: u_cod, nombre:u_nom, nota:u_not};
+    var nuevoEstudiante = { codigo: e_cod, nombre:e_nom, nota:e_not};
 
-    Registro.push(nuevoRegistro);
-}
-function m_promedio() {
+    Estudiante.push(nuevoEstudiante);
+    e_nom= "";
+    e_not= "";
+    actualizar_cod();
     mostrar();
 }
+function m_promedio() {
+
+    var resultado = 0;
+    var cont =  Estudiante.length;
+
+
+    for(var i=0;i<Estudiante.length;i++){
+       resultado+=Estudiante[i].nota;
+    }
+
+   alert("El promedio de las notas de los estudiantes registrados es: " + (resultado/cont).toFixed(2) );
+}
 function m_mayor() {
-    calcularTotalVentas(ventas);
-}5
+
+    
+    alert("Mostrar mayor");
+}
 function m_menor() {
-    calcularTotalVentas(ventas);
+    alert("Mostrar menor");
 }
 
